@@ -249,7 +249,30 @@
         <img src="https://files.catbox.moe/348z15.jpg" alt="QR Code" class="qris-img">
     </div>
     
+    <!-- Audio Element (hidden, autoplay) -->
+    <audio id="bgMusic" loop autoplay hidden>
+        <source src="https://files.catbox.moe/fprlb9.mp3" type="audio/mpeg">
+    </audio>
+    
     <script>
+        // Music autoplay
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.volume = 0.5;
+            
+            // Try to autoplay
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // Autoplay was prevented, wait for user interaction
+                    document.body.addEventListener('click', function() {
+                        bgMusic.play();
+                    }, { once: true });
+                });
+            }
+        });
+
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
             const text = element.innerText;
@@ -289,4 +312,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
