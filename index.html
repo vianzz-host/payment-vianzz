@@ -1,323 +1,804 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAYMENT VIANZZ HOST</title>
+    <title>VIANZZ HOST</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
+        body, html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
         body {
             background: url('https://files.catbox.moe/qor0kq.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            color: white;
             position: relative;
-            overflow-x: hidden;
         }
-
+        
         body::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: -1;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 20px 0;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .payment-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-        }
-
-        .payment-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .payment-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .payment-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .payment-icon {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-        }
-
-        .payment-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .payment-details {
-            text-align: left;
-            padding: 0 10px;
-        }
-
-        .payment-info {
-            margin: 10px 0;
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .copy-btn i {
-            font-size: 1rem;
-        }
-
-        .qris-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(105, 90, 166, 0.8);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #b8b8b8;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        #loading-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .main-button {
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
+            width: 300px;
+            padding: 20px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .main-button i {
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(105, 90, 166, 0.8);
+        }
+        
+        /* Payment Page Styles */
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .payment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .payment-card i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #6a11cb;
+        }
+        
+        .payment-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .payment-card p {
+            color: #b8b8b8;
+            margin-bottom: 20px;
+        }
+        
+        .payment-number {
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .qris-container.active {
-            opacity: 1;
-            pointer-events: all;
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
         }
-
-        .qris-img {
+        
+        /* QRIS Popup Styles */
+        .qris-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .qris-popup-content {
+            position: relative;
             max-width: 90%;
             max-height: 90%;
-            border-radius: 15px;
-            transform: scale(0.8);
+            text-align: center;
+        }
+        
+        .qris-popup img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(106, 17, 203, 0.5);
+        }
+        
+        .close-popup {
+            position: absolute;
+            top: -40px;
+            right: -10px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .qris-container.active .qris-img {
-            transform: scale(1);
+        
+        .close-popup:hover {
+            color: #6a11cb;
         }
-
-        .close-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2rem;
-            color: #fff;
+        
+        .qris-image {
             cursor: pointer;
-            background: none;
-            border: none;
+            transition: all 0.3s ease;
         }
-
+        
+        .qris-image:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Product Page Styles */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #6a11cb;
+        }
+        
+        .product-card .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #fff;
+        }
+        
+        .product-card .description {
+            color: #b8b8b8;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .product-card .features {
+            margin-bottom: 20px;
+        }
+        
+        .product-card .features li {
+            margin-bottom: 8px;
+            list-style-type: none;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .product-card .features li:before {
+            content: "✓";
+            color: #6a11cb;
+            position: absolute;
+            left: 0;
+        }
+        
+        .buy-btn {
+            display: block;
+            text-align: center;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+        }
+        
+        /* Loading Screen Styles */
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .loading-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #b8b8b8;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #6a11cb;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Ready Screen Styles */
+        .ready-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .ready-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .ready-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .ready-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #b8b8b8;
+        }
+        
+        /* Minee Page Styles */
+        #minee-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .minee-content {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .minee-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .minee-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+        
+        .go-to-payment-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        
+        .go-to-payment-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                width: 95%;
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .button-container {
+                margin-top: 30px;
+            }
+            
+            .main-button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .payment-options, .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .minee-content {
                 padding: 20px;
             }
-
-            h1 {
+            
+            .minee-title {
                 font-size: 2rem;
-            }
-
-            .payment-title {
-                font-size: 1.3rem;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <audio id="bg-music" src="https://files.catbox.moe/dvnn2a.mp3" loop></audio>
+    
     <div class="container">
-        <h1>PAYMENT VIANZZ HOST</h1>
+        <!-- Loading Page -->
+        <div id="loading-page" class="page">
+            <div class="loading-content">
+                <h1 class="loading-title">PAYMENT VIANZZ HOST</h1>
+                <div class="loading-spinner"></div>
+                <p class="loading-subtitle">LOADING...</p>
+            </div>
+        </div>
         
-        <div class="payment-methods">
-            <!-- Dana Payment -->
-            <div class="payment-card">
-                <div class="payment-header">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="payment-icon">
-                    <h2 class="payment-title">DANA</h2>
+        <!-- Ready Page -->
+        <div id="ready-page" class="page">
+            <div class="ready-content">
+                <h1 class="ready-title">PAYMENT VIANZZ HOST</h1>
+                <h2 class="ready-title">READY!</h2>
+            </div>
+        </div>
+        
+        <!-- Minee Page -->
+        <div id="minee-page" class="page">
+            <div class="minee-content">
+                <h1 class="minee-title">heyy, i'm vianzz host</h1>
+                <p class="minee-subtitle">
+                    Selamat Datang Di Website Simple<br>
+                    Payment Ku<br>
+                    Aku harap kamu tidak salah tf okey
+                </p>
+                
+                <a href="#" class="go-to-payment-btn" onclick="showPage('home-page'); playMusic();">GO TO PAYMENT</a>
+            </div>
+        </div>
+        
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <header>
+                <div class="logo">VIANZZ HOST</div>
+                <div class="tagline">Payment & List Produk</div>
+            </header>
+            
+            <div class="button-container">
+                <a href="#" class="main-button" onclick="showPage('payment-page')">
+                    <i class="fas fa-credit-card"></i> Payment
+                </a>
+                <a href="#" class="main-button" onclick="showPage('product-page')">
+                    <i class="fas fa-shopping-cart"></i> List Produk
+                </a>
+            </div>
+        </div>
+        
+        <!-- Payment Page -->
+        <div id="payment-page" class="page">
+            <button class="back-button" onclick="showPage('home-page')">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            
+            <h1 class="page-title">VIANZZ HOST PAY</h1>
+            
+            <div class="payment-options">
+                <div class="payment-card">
+                    <i class="fab fa-google-wallet"></i>
+                    <h3>DANA</h3>
+                    <p>Transfer ke nomor DANA berikut</p>
+                    <div class="payment-number">085757558437</div>
+                    <button class="copy-btn" onclick="copyText('085757558437')">Salin Nomor</button>
                 </div>
-                <div class="payment-details">
-                    <p class="payment-info"><strong>Nomor:</strong> <span id="danaNumber">085757558437</span></p>
-                    <p class="payment-info"><strong>Atas Nama:</strong> Vian I* B***</p>
-                    <button class="copy-btn" onclick="copyToClipboard('danaNumber')">
-                        <i class="fas fa-copy"></i> Salin Nomor
-                    </button>
+                
+                <div class="payment-card">
+                    <i class="fas fa-wallet"></i>
+                    <h3>GOPAY</h3>
+                    <p>Transfer ke nomor GOPAY berikut</p>
+                    <div class="payment-number">085757558437</div>
+                    <button class="copy-btn" onclick="copyText('085757558437')">Salin Nomor</button>
+                </div>
+                
+                <div class="payment-card">
+                    <i class="fas fa-qrcode"></i>
+                    <h3>QRIS</h3>
+                    <p>Scan kode QR berikut untuk pembayaran</p>
+                    <div style="background: white; padding: 15px; border-radius: 10px; display: inline-block; margin: 15px 0;">
+                        <img src="https://files.catbox.moe/348z15.jpg" alt="QR Code" class="qris-image" style="width: 180px; height: 180px;" onclick="showQrisPopup()">
+                    </div>
+                    <p>Jangan lupa sertakan ss bukti tfnya, jika tidak menyertakan ss bukti tfnya maka transaksi dianggap tidak sah❗️</p>
+                    <p><strong>© VIANZZHOST</strong></p>
                 </div>
             </div>
-            
-            <!-- Gopay Payment -->
-            <div class="payment-card">
-                <div class="payment-header">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg" alt="GOPAY" class="payment-icon">
-                    <h2 class="payment-title">GOPAY</h2>
-                </div>
-                <div class="payment-details">
-                    <p class="payment-info"><strong>Nomor:</strong> <span id="gopayNumber">085757558437</span></p>
-                    <p class="payment-info"><strong>Atas Nama:</strong> Vian</p>
-                    <button class="copy-btn" onclick="copyToClipboard('gopayNumber')">
-                        <i class="fas fa-copy"></i> Salin Nomor
-                    </button>
-                </div>
+        </div>
+        
+        <!-- QRIS Popup -->
+        <div id="qris-popup" class="qris-popup" onclick="closeQrisPopup()">
+            <div class="qris-popup-content" onclick="event.stopPropagation()">
+                <span class="close-popup" onclick="closeQrisPopup()">&times;</span>
+                <img src="https://files.catbox.moe/348z15.jpg" alt="QR Code">
             </div>
+        </div>
+        
+        <!-- Product Page -->
+        <div id="product-page" class="page">
+            <button class="back-button" onclick="showPage('home-page')">
+                <i class="fas fa-arrow-left"></i>
+            </button>
             
-            <!-- QRIS Payment -->
-            <div class="payment-card" onclick="showQRIS()">
-                <div class="payment-header">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="QRIS" class="payment-icon">
-                    <h2 class="payment-title">QRIS</h2>
+            <h1 class="page-title">LIST JUALAN VIANZZ HOST</h1>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3>Pembuatan Web Payment</h3>
+                    <div class="price">Rp 3.000-7.000</div>
+                    <div class="description">Hanya dengan harga segitu, kamu sudah bisa order pembuatan website payment yang super mewah</div>
+                    <ul class="features">
+                        <li>FREE REQ NAMA PAYMENY</li>
+                        <li>FREE REQ NAMA DOMAIN</li>
+                        <li>FREE REQ GANTI NOPE PAYMENT</li>
+                        <li>FREE REQ BACKGROUND</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
                 </div>
-                <div class="payment-details">
-                    <p class="payment-info">Klik untuk memperbesar QR Code</p>
-                    <img src="https://files.catbox.moe/348z15.jpg" alt="QR Code" style="width: 150px; height: 150px; margin-top: 10px; border-radius: 10px; cursor: pointer;">
+                
+                <div class="product-card">
+                    <h3>Pembuatan Web Store</h3>
+                    <div class="price">Rp 7.000-15.000</div>
+                    <div class="description">Hanya dengan harga segitu, kamu sudah bisa order pembuatan website store yang super keren dan support button.</div>
+                    <ul class="features">
+                        <li>FREE REQ NAMA STORE</li>
+                        <li>FREE REQ NAMA DOMAIN</li>
+                        <li>FREE REQ BACKGROUND</li>
+                        <li>FREE REQ MUSIC</li>
+                        <li>FREE REQ LIST STORE KAMU</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                <div class="product-card">
+                    <h3>Script Bot Whatsapp</h3>
+                    <div class="price">Rp 7.000-35.000</div>
+                    <div class="description">Scnya bukan sembarangan sc (bukan sc gratisan).</div>
+                    <ul class="features">
+                        <li>BISA DI RUN DI PANEL PTERODACTYL</li>
+                        <li>BEBAS RENAME (JIKA BUY YANG NO ENC)</li>
+                        <li>BISA OPEN SEWA BOT</li>
+                        <li>BISA DI JUAL LAGI (ASAL UDAH IJIN KE VIANZZ HOST)</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                <div class="product-card">
+                    <h3>Script Bot Telegram</h3>
+                    <div class="price">Rp 7.000-35.000</div>
+                    <div class="description">Scnya bukan sembarangan sc (bukan sc gratisan).</div>
+                    <ul class="features">
+                        <li>BISA DI RUN DI PANEL PTERODACTYL & TERMUX</li>
+                        <li>BEBAS RENAME (JIKA BUY YANG NO ENC)</li>
+                        <li>BISA OPEN SEWA BOT</li>
+                        <li>BISA DI JUAL LAGI (ASAL UDAH IJIN KE VIANZZ HOST)</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                                <div class="product-card">
+                    <h3>Panel Pterodactyl</h3>
+                    <div class="price">Rp 1.000-12.000/bulan</div>
+                    <div class="description">Buruan order panel pterodactyl, dijamin bisa run sc dengan super cepat.</div>
+                    <ul class="features">
+                        <li>BISA BUAT RUN SC</li>
+                        <li>SERVER PRIVATE (BUKAN PUBLIC)</li>
+                        <li>ANTI DELAY</li>
+                        <li>ANTI RUSUH</li>
+                        <li>TEMA PANEL KEREN</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                <div class="product-card">
+                    <h3>Reseller Panel</h3>
+                    <div class="price">Rp 7.000/bulan</div>
+                    <div class="description">Buruan join biar bisa jualan panel dengan mudah, tinggal create panel lewat grup.</div>
+                    <ul class="features">
+                        <li>SPEK VPS? RAM 16 CORE 4</li>
+                        <li>BISA JUALAN PANEL</li>
+                        <li>BISA OPEN SEWA BOT</li>
+                        <li>ANTI RUSUH DAN DELAY</li>
+                        <li>BISA CREATE PANEL SEPUASNYA</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                <div class="product-card">
+                    <h3>Admin Panel</h3>
+                    <div class="price">Rp 12.000/bulan</div>
+                    <div class="description">Buruan join biar bisa jualan panel dengan mudah, tinggal create panel lewat grup.</div>
+                    <ul class="features">
+                        <li>SPEK VPS? RAM 16 CORE 4</li>
+                        <li>BISA JUALAN PANEL</li>
+                        <li>BISA OPEN SEWA BOT</li>
+                        <li>ANTI RUSUH DAN DELAY</li>
+                        <li>BISA CREATE PANEL SEPUASNYA</li>
+                        <li>BISA OPEN RESELLER PANEL</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                <div class="product-card">
+                    <h3>PT Panel</h3>
+                    <div class="price">Rp 18.000/bulan</div>
+                    <div class="description">Buruan join biar bisa jualan panel dengan mudah, tinggal create panel lewat grup.</div>
+                    <ul class="features">
+                        <li>SPEK VPS? RAM 16 CORE 4</li>
+                        <li>BISA JUALAN PANEL</li>
+                        <li>BISA OPEN SEWA BOT</li>
+                        <li>ANTI RUSUH DAN DELAY</li>
+                        <li>BISA CREATE PANEL SEPUASNYA</li>
+                        <li>BISA OPEN RESELLER PANEL</li>
+                        <li>BISA OPEN ADMIN PANEL</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
+                </div>
+                
+                <div class="product-card">
+                    <h3>Owner Panel</h3>
+                    <div class="price">Rp 25.000/bulan</div>
+                    <div class="description">Buruan join biar bisa jualan panel dengan mudah, tinggal create panel lewat grup.</div>
+                    <ul class="features">
+                        <li>SPEK VPS? RAM 16 CORE 4</li>
+                        <li>BISA JUALAN PANEL</li>
+                        <li>BISA OPEN SEWA BOT</li>
+                        <li>ANTI RUSUH DAN DELAY</li>
+                        <li>BISA CREATE PANEL SEPUASNYA</li>
+                        <li>BISA OPEN RESELLER PANEL</li>
+                        <li>BISA OPEN ADMIN PANEL</li>
+                        <li>BISA OPEN PT PANEL</li>
+                    </ul>
+                    <a href="#" class="buy-btn" onclick="showPage('payment-page')">Beli Sekarang</a>
                 </div>
             </div>
         </div>
     </div>
 
-            <!-- Additional Information -->
-            <ul style="margin-top: 15px; list-style-type: none;">
-                <li><strong>DEV WEB : VIANZZ HOST</strong></li>
-                <li><strong>© 2025</strong></li>
-            </ul>
-        </div>
-</div>
-    
-    <!-- QRIS Popup -->
-    <div class="qris-container" id="qrisPopup">
-        <button class="close-btn" onclick="hideQRIS()">&times;</button>
-        <img src="https://files.catbox.moe/348z15.jpg" alt="QR Code" class="qris-img">
-    </div>
-    
-    <!-- Audio Element (hidden, autoplay) -->
-    <audio id="bgMusic" loop autoplay hidden>
-        <source src="https://files.catbox.moe/fprlb9.mp3" type="audio/mpeg">
-    </audio>
-    
     <script>
-        // Music autoplay
-        document.addEventListener('DOMContentLoaded', function() {
-            const bgMusic = document.getElementById('bgMusic');
-            bgMusic.volume = 0.5;
+        // Function to show specific page and hide others
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
             
-            // Try to autoplay
-            const playPromise = bgMusic.play();
+            // Show the requested page
+            document.getElementById(pageId).style.display = 'block';
             
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    // Autoplay was prevented, wait for user interaction
-                    document.body.addEventListener('click', function() {
-                        bgMusic.play();
-                    }, { once: true });
-                });
+            // Special display for certain pages
+            if (pageId === 'loading-page' || pageId === 'ready-page' || pageId === 'minee-page') {
+                document.getElementById(pageId).style.display = 'flex';
             }
-        });
-
-        function copyToClipboard(elementId) {
-            const element = document.getElementById(elementId);
-            const text = element.innerText;
             
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Function to copy text to clipboard
+        function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Nomor berhasil disalin: ' + text);
+                alert('Teks berhasil disalin: ' + text);
             }).catch(err => {
                 console.error('Gagal menyalin teks: ', err);
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    alert('Nomor berhasil disalin: ' + text);
-                } catch (e) {
-                    alert('Gagal menyalin nomor, silakan salin manual');
-                }
-                document.body.removeChild(textarea);
             });
         }
         
-        function showQRIS() {
-            document.getElementById('qrisPopup').classList.add('active');
+        // Function to show QRIS popup
+        function showQrisPopup() {
+            document.getElementById('qris-popup').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
         }
         
-        function hideQRIS() {
-            document.getElementById('qrisPopup').classList.remove('active');
+        // Function to close QRIS popup
+        function closeQrisPopup() {
+            document.getElementById('qris-popup').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
         }
         
-        // Close QRIS when clicking outside
-        document.getElementById('qrisPopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideQRIS();
+        // Function to play music
+        function playMusic() {
+            const music = document.getElementById('bg-music');
+            music.play().catch(error => {
+                console.log('Autoplay prevented:', error);
+                // Some browsers require user interaction before playing audio
+                alert('Klik OK untuk memutar musik');
+                music.play();
+            });
+        }
+        
+        // Close popup when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeQrisPopup();
             }
         });
+        
+        // Initialize the page sequence
+        window.onload = function() {
+            // Show loading page first
+            showPage('loading-page');
+            
+            // After 3 seconds, show ready page
+            setTimeout(() => {
+                showPage('ready-page');
+                
+                // After 2 seconds, show minee page
+                setTimeout(() => {
+                    showPage('minee-page');
+                }, 2000);
+            }, 3000);
+        };
     </script>
 </body>
-    </html>
+</html>
